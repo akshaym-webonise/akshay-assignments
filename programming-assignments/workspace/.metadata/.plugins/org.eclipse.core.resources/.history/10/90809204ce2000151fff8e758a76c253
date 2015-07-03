@@ -1,0 +1,18 @@
+
+public class MainClass 
+{
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) 
+	{
+		int tokens = args.length;
+		
+		for(int arg = 0 ; arg<tokens ; arg++)
+		{
+			System.out.println("Arg "+arg+" : "+args[arg]);
+		}
+	}
+
+}

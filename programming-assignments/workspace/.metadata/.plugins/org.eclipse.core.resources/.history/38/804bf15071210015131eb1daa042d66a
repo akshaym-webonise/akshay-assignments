@@ -1,0 +1,42 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class IntelliBot {
+
+	/**
+	 * @param args
+	 */
+	
+	public int getCheapestRestaurant(Map<Integer, Map<String, Double>> restaurants, String items[])
+	{
+		boolean hasMenu;
+		Map<String, Double> menuItems = new HashMap<String, Double>();
+		for(Integer key:restaurants.keySet())
+		{
+			menuItems = restaurants.get(key);
+			hasMenu = isHavingTheMenu(menuItems, items);
+			System.out.println((hasMenu==true)?"Restaurant has menu":"No");
+		}
+		return 1;
+	}
+	
+	public boolean isHavingTheMenu(Map<String, Double> menuItems, String items[])
+	{
+		boolean havingMenu=true;
+		for(String menu : menuItems.keySet())
+		{
+			for(String item : items)
+			{
+				if(!(menu.contains(item)))
+					havingMenu = false;
+			}
+		}
+		return true;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
