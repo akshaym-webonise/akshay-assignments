@@ -1,0 +1,284 @@
+<html>
+<head>
+	
+	<script type="text/javascript">
+		var isProgressTableActive = false;
+		var isHistoryActive = false;
+
+		function loadTheData()
+		{
+			showHistoryTable("toDoTable", "toDoList", "To Do Tasks", 3);
+			showHistoryTable("completedTable", "completedList", "Completed Tasks", 2);
+			if(isProgressTableActive)
+			showHistoryTable("progressTable", "inProcessList", "In Process Tasks", 3);
+			if(isHistoryActive)
+			showHistoryTable("historyTable", "historyList", "Task History", 1);
+		}
+
+		function createRow()
+		{
+			console.log("Inserting new row to To do list");
+			var task = document.getElementById("inputText");
+    		var table = document.getElementById("toDoTable");
+ 			var row = document.createElement('tr'); 
+			var col1 = document.createElement('td'); 
+			var col2 = document.createElement('td'); 
+			var col3 = document.createElement('td'); 
+			row.appendChild(col1); 
+			row.appendChild(col2); 
+			row.appendChild(col3); 
+			col1.innerHTML = task.value; 
+			col2.innerHTML = '<input type="button" id="delButton" onclick="deleteRow(this)" value="X" class="btn-style"></input>'; //
+			col3.innerHTML = '<input type="button" id="delButton" onclick="shiftToNext(this)" value="Y" class="btn-style"></input>'; //
+			table.appendChild(row);
+			task.value="";
+			console.log("Inserting new row done");
+			addToLocalStorage("toDoList", col1.innerHTML);
+			addToLocalStorage("historyList", col1.innerHTML);
+		}
+
+		function deleteRow(row)
+		{
+			console.log(row.parentNode);
+			console.log(row.parentNode.parentNode);
+			console.log(row.parentNode.parentNode.rowIndex);
+			console.log((row.parentNode.parentNode).cells[0].innerHTML);
+			var table = document.getElementById(row.parentNode.parentNode.parentNode.id);
+			var list = getList(table);
+			deleteFromLocal(list, (row.parentNode.parentNode).cells[0].innerHTML);
+			table.deleteRow(row.parentNode.parentNode.rowIndex);
+			console.log("row deleted");
+		}
+
+		function getList(table)
+		{
+			var list;
+			if(table.id=="toDoTable")
+				list="toDoList";
+			else if(table.id==="completedTable")
+				list="completedList";
+			else if(table.id==="progressTable")
+				list="inProcessList";
+			console.log(table.id+"List = "+list);
+			return list;
+		}
+
+		function deleteFromLocal(storage, data)
+		{
+			var tab = localStorage.getItem(storage);
+			var newRows="";
+			if(tab==null)
+			{
+				console.log(Storage+" is null");
+				tab="";
+			}
+			else
+			{
+				console.log("in else");
+				var myRows = tab.split(',');
+				for(i=0 ; i<myRows.length-1 ; i++)
+				{
+					console.log(myRows[i]+" "+data);
+					if(myRows[i]!==data)
+					{
+						newRows=newRows+myRows[i]+",";
+					}
+				}
+			}
+			console.log("N - "+newRows+" S-"+storage);
+			localStorage.setItem(storage,newRows);
+		}
+
+		function shiftToNext(row)
+		{
+			console.log(row.parentNode.parentNode.parentNode);
+
+			var rowNum = row.parentNode.parentNode.rowIndex;
+			console.log(rowNum);
+			if(isProgressTableActive && row.parentNode.parentNode.parentNode.id=="toDoTable")
+			{
+				var text = (document.getElementById("toDoTable").rows[rowNum]).cells[0].innerHTML;
+				var row = document.createElement('tr'); 
+				var col1 = document.createElement('td'); 
+				var col2 = document.createElement('td'); 
+				var col3 = document.createElement('td'); 
+				row.appendChild(col1); 
+				row.appendChild(col2); 
+				row.appendChild(col3); 
+				col1.innerHTML = text; 
+				col2.innerHTML = '<input type="button" id="delButton" onclick="deleteRow(this)" value="X" class="btn-style"></input>'; //
+				col3.innerHTML = '<input type="button" id="delButton" onclick="shiftToNext(this)" value="Y" class="btn-style"></input>'; //
+				var table = document.getElementById("progressTable");
+				table.appendChild(row);
+				var list = getList(document.getElementById("toDoTable"));
+				deleteFromLocal(list, text);
+				document.getElementById("toDoTable").deleteRow(rowNum);	
+				addToLocalStorage("inProcessList", row.cells[0].innerHTML);
+			}
+			else if(isProgressTableActive && row.parentNode.parentNode.parentNode.id=="progressTable")
+			{
+				var text = (document.getElementById("progressTable").rows[rowNum]).cells[0].innerHTML;
+				console.log(text);
+				var row = document.createElement('tr'); 
+				var col1 = document.createElement('td'); 
+				var col2 = document.createElement('td'); 
+				row.appendChild(col1); 
+				row.appendChild(col2); 
+				col1.innerHTML = text; 
+				col2.innerHTML = '<input type="button" id="delButton" onclick="deleteRow(this)" value="X" class="btn-style"></input>'; //
+				var table = document.getElementById("completedTable");
+				table.appendChild(row);
+				var list = getList(document.getElementById("progressTable"));
+				deleteFromLocal(list, text);
+				document.getElementById("progressTable").deleteRow(rowNum);	
+				addToLocalStorage("completedList", row.cells[0].innerHTML);
+			}
+			else
+			{
+				var text = (document.getElementById("toDoTable").rows[rowNum]).cells[0].innerHTML;
+				console.log(text);
+				var row = document.createElement('tr'); 
+				var col1 = document.createElement('td'); 
+				var col2 = document.createElement('td'); 
+				row.appendChild(col1); 
+				row.appendChild(col2); 
+				col1.innerHTML = text; 
+				col2.innerHTML = '<input type="button" id="delButton" onclick="deleteRow(this)" value="X" class="btn-style"></input>'; //
+				var table = document.getElementById("completedTable");
+				table.appendChild(row);
+				var list = getList(document.getElementById("toDoTable"));
+				deleteFromLocal(list, text);
+				document.getElementById("toDoTable").deleteRow(rowNum);	
+				addToLocalStorage("completedList", col1.innerHTML);
+			}
+			
+			console.log("Shifting of the row done");
+		}
+
+		function addToLocalStorage(Storage, data)
+		{
+			var tab = localStorage.getItem(Storage);
+			if(tab==null)
+			{
+				console.log(Storage+" is null");
+				tab="";
+			}
+			tab = tab+data+",";
+			localStorage.setItem(Storage,tab);
+		}
+
+		function showHistoryTable(tableName, listName, headerText, cnt)
+		{
+			console.log("Retrieving history");
+			var table = document.getElementById(tableName);
+			var data = localStorage.getItem(listName);
+			var myRows = data.split(',');
+			console.log(myRows.length);
+			table.innerHTML = "";
+			var header = document.createElement('th');
+			header.innerHTML = headerText;
+			table.appendChild(header);
+			for(i=0 ; i<myRows.length-1 ; i++)
+			{
+				var row = document.createElement('tr'); 
+				var col1 = document.createElement('td');
+				col1.innerHTML =  myRows[i];
+				console.log(i+" "+myRows[i]);
+				row.appendChild(col1);
+				if(cnt>1)
+				{
+					var col1 = document.createElement('td');
+					col1.innerHTML =  '<input type="button" id="delButton" onclick="deleteRow(this)" value="X" class="btn-style"></input>'; //
+					row.appendChild(col1);
+				}
+				if(cnt>2)
+				{
+					var col1 = document.createElement('td');
+					col1.innerHTML =  '<input type="button" id="delButton" onclick="shiftToNext(this)" value="Y" class="btn-style"></input>'; //
+					row.appendChild(col1);
+				}
+				table.appendChild(row);
+			}
+			//table.innerHTML = data;
+			console.log("Retrieving history done");
+		}
+
+		function setProgress()
+		{
+			isProgressTableActive = document.getElementById("progressVisibility").checked;
+			console.log(isProgressTableActive);
+			if(!isProgressTableActive)
+			{
+				var table = document.getElementById("progressTable");
+				table.innerHTML="";
+				var header = document.createElement('th');
+				header.innerHTML = "In Process Tasks";
+				table.appendChild(header);
+			}
+			else
+			{
+				showHistoryTable("progressTable", "inProcessList", "In Process Tasks", 3);
+			}
+		}
+
+		function setHistory()
+		{
+			isHistoryActive = document.getElementById("historyVisibility").checked;
+			console.log(isHistoryActive);
+			if(isHistoryActive)
+			{
+				showHistoryTable("historyTable", "historyList", "Task History", 1);
+			}
+			else
+			{
+				var table = document.getElementById("historyTable");
+				table.innerHTML="";
+				var header = document.createElement('th');
+				header.innerHTML = "Task History";
+				table.appendChild(header);
+			}
+		}
+
+		function clearLocalStorage()
+		{
+			localStorage.clear();
+		}
+	</script>
+</head>
+<body onload="loadTheData()">
+
+	Enter task
+	<input type="text" id="inputText" class="dap_text_box"></input>
+	<input type="button" id="inputButton" value="Add Task" onclick="createRow()" class="btn-style"></input>
+	<input type="button" id="clearButton" value="Clear Storage" onclick="clearLocalStorage()" class="btn-style"></input>
+	<input type="checkbox" id="historyVisibility" name="Show History" onclick="setHistory()">History</input>
+	<input type="checkbox" id="progressVisibility" name="Show Progress" onclick="setProgress()">In Process</input>
+
+	<table id="mainTable" class="CSSTableGenerator" width="100%">
+	<tr>
+		<td>
+			<table id="toDoTable" class="CSSTableGenerator" width="50%" height="200">
+				<th>To Do List</th>
+			</table>
+		</td>			
+		<td>
+			<table id="completedTable" class="CSSTableGenerator" width="50%" height="200">
+				<th>Completed Tasks</th>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table id="progressTable" class="CSSTableGenerator" width="50%" height="200">
+				<th>In Process Tasks</th>
+			</table>
+		</td>
+		<td>
+			<table id="historyTable" class="CSSTableGenerator" width="50%" height="200">
+		<th>Task History</th>
+	</table>
+		</td>
+	</tr>
+</table>	
+</body>
+</html>
