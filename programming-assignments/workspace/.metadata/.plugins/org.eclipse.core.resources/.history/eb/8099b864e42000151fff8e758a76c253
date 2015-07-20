@@ -1,0 +1,64 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class FileLoader 
+{	
+	BufferedReader filePointer;
+	String row;
+	Map<Integer, Map<String, Double>> restaurants = new HashMap<Integer, Map<String, Double>>();
+	Map<String, Double> menuItems = new HashMap<String, Double>();
+	public Map<Integer, Map<String, Double>> loadMenuFile(String file)
+	{
+		try
+		{
+			File menuFile = new File(file);
+			filePointer = new BufferedReader(new FileReader(menuFile));
+			while((row = filePointer.readLine())!=null)
+			{
+				menuItems.clear();
+				String rowData[] = row.split(",", 3);
+				
+				if(restaurants.isEmpty())
+				{
+					menuItems.put(rowData[2], new Double(rowData[1]));
+					restaurants.put(new Integer(rowData[0]), menuItems);
+				}
+				else
+				{
+					if(restaurants.containsKey(new Integer(rowData[0])))
+					menuItems = restaurants.get(new Integer(rowData[0]));
+					menuItems.put(rowData[2], new Double(rowData[1]));
+					restaurants.put(new Integer(rowData[0]), menuItems);
+				}
+				new MainClass().display();
+				/*for(String data:rowData)
+				{
+					System.out.print(data+"\t");
+				}
+				System.out.println();*/
+			}
+		}
+		catch(FileNotFoundException e)
+		{
+			System.out.println("File not present.");
+			//e.printStackTrace();
+		}
+		catch(IOException e)
+		{
+			System.out.println("Error reading file");
+		}	
+		
+		return restaurants;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,42 @@
+<html>
+<head>
+	<link rel=StyleSheet href="style.css" type="text/css"></link>
+	<script type="text/javascript" src="myscript.js"></script>
+</head>
+	<body onload="loadTheData()">
+		<div class="container">
+
+			<div class="row"><center>
+				<div class="span3">
+					<div class="style-1 clearfix">
+						<input type="text" id="inputText" placeholder="Enter Task"></input>
+					</div>
+				</div>
+				<div class="span3">
+					<input type="button" id="inputButton" value="Add Task" class="btn btn-large btn-block btn-inverse"></input></div>
+				<div class="span3">
+				<input type="button" id="clearButton" value="Clear Storage" class="btn btn-large btn-block btn-inverse"></input>
+				</div>
+				<div class="span3">
+					<input type="checkbox" id="historyVisibility" class="checkbox.inline" name="Show History">History</input>
+					<input type="checkbox" id="progressVisibility" name="Show Progress">In Process</input>
+				</div>
+			</center>
+			</div>
+
+			<div class="row">
+				<table id="toDoTable" class="names" align="left" width="40%">
+					<th colspan="3">To Do List</th>
+				</table>
+				<table id="completedTable" class="names" align="right" width="40%">
+					<th colspan="3">Completed Tasks</th>
+				</table>
+			</div>
+
+			<div class="row">
+				<table id="progressTable" class="names" align="left" width="40%"></table>				
+				<table id="historyTable" class="names" align="right" width="40%" top="1000"></table>			
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,23 @@
+
+public class MainClass 
+{
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) 
+	{
+		int tokens = args.length;
+		String menuFile="";
+		String items[];
+		for(int arg = 0 ; arg<tokens ; arg++)
+		{
+			System.out.println("Arg "+arg+" : "+args[arg]);
+		}
+		
+		menuFile = args[0];
+		new FileLoader().loadMenuFile(menuFile);
+		
+		System.out.println("Terminated");
+	}
+}

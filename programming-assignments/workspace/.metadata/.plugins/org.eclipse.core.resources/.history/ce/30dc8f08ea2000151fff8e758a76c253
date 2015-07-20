@@ -1,0 +1,18 @@
+import java.util.Map;
+
+
+public class IntelliBot {
+
+	/**
+	 * @param args
+	 */
+	
+	public void getCheapestRestaurant(Map<Integer, Map<String, Double>> restaurants, String items[])
+	
+	public boolean is havingTheMenu(){}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,49 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class MainClass 
+{
+
+	/**
+	 * @param args
+	 */
+	
+	public void display(Map<Integer, Map<String, Double>> restaurants)
+	{
+		Map<String, Double> menuItems = new HashMap<String, Double>();
+		
+		for(Integer key:restaurants.keySet())
+		{
+			
+			menuItems = restaurants.get(key);
+			System.out.print(" "+key+"\t");
+			for(String item:menuItems.keySet())
+			{
+				System.out.print(item);
+			}
+			menuItems.clear();
+			System.out.println();
+		}
+		
+	}
+	
+	public static void main(String[] args) 
+	{
+		int tokens = args.length;
+		String menuFile="";
+		//String items[];
+		Map<Integer, Map<String, Double>> restaurants;
+		
+		for(int arg = 0 ; arg<tokens ; arg++)
+		{
+			System.out.println("Arg "+arg+" : "+args[arg]);
+		}
+		
+		menuFile = args[0];
+		restaurants = new FileLoader().loadMenuFile(menuFile);
+		
+		new MainClass().display(restaurants);
+		System.out.println("Terminated");
+	}
+}
