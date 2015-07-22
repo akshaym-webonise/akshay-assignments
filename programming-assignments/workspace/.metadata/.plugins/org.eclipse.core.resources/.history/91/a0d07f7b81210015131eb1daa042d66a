@@ -1,0 +1,101 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+public class IntelliBot {
+
+	/**
+	 * @param args
+	 */
+	double minCost = 99, restCost=0;
+	
+	public double getRestCost() {
+		return restCost;
+	}
+
+	public void setRestCost(double restCost) {
+		this.restCost = restCost;
+	}
+
+	public double getMinCost() {
+		return minCost;
+	}
+
+	public void setMinCost(double minCost) {
+		this.minCost = minCost;
+	}
+
+	public int getCheapestRestaurant(Map<Integer, Map<String, Double>> restaurants, List<String> items)
+	{
+		boolean hasMenu;
+		Map<String, Double> menuItems = new HashMap<String, Double>();
+		double minCost = 0;
+		for(Integer key:restaurants.keySet())
+		{
+			menuItems.clear();
+			menuItems = restaurants.get(key);
+			//System.out.println(menuItems);
+			hasMenu = isHavingTheMenu(menuItems, items);
+			
+			if(hasMenu)
+			{
+				System.out.println("Restaurant "+key+" has menu");
+				System.out.println("Cost = "+this.getMinCost());
+				//minCost = getBill(menuItems, items);
+			}
+		}
+		return 1;
+	}
+	
+	public boolean isHavingTheMenu(Map<String, Double> menuItems, List<String> items)
+	{
+		boolean havingMenu=true, found;
+		double cost=0;
+		for(String item : items)
+		{
+			found = containsItem(menuItems, item);
+			//System.out.println(item+" "+found);
+			if(found)
+			{
+				for(String i:menuItems.keySet())
+					System.out.println(i);
+				System.out.println(item+" = "+menuItems.get(item));
+				cost += menuItems.get(item);
+			}
+			if(havingMenu==false || found==false)
+			havingMenu = false;
+		}
+		if(havingMenu == true && cost<minCost)
+			this.setRestCost(cost);
+		//System.out.println(items+" are having "+havingMenu);
+		return havingMenu;
+	}
+	
+	
+	public boolean containsItem(Map<String, Double> menuItems, String item)
+	{
+		for(String menu : menuItems.keySet())
+		{
+			//System.out.println(menu+" "+item);
+			if(menu.contains(item))			
+			{				
+				return true;				
+			}
+		}
+		return false;
+	}
+	
+	/*public double getBill(Map<String, Double> menuItems, List<String> items)
+	{
+		double cost=0;
+		
+		for(menuItems)
+	}*/
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

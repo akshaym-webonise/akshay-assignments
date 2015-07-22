@@ -1,0 +1,14 @@
+
+public class IntelliBot {
+
+	/**
+	 * @param args
+	 */
+	
+	public boolean is havingTheMenu()
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

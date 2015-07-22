@@ -1,0 +1,78 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class FileLoader 
+{	
+	BufferedReader csvReader;
+	String row;
+	Map<Integer, Map<String, Double>> restaurants = new HashMap<Integer, Map<String, Double>>();
+	Map<String, Double> menuItems = new HashMap<String, Double>();
+	
+	public Map<Integer, Map<String, Double>> loadcsvFile(String file)
+	{
+		try
+		{
+			File csvFile = new File(file);
+			csvReader = new BufferedReader(new FileReader(csvFile));
+			while((row = csvReader.readLine())!=null)
+			{
+				menuItems = new HashMap<String, Double>();
+				String rowData[] = row.split(",", 3);
+				//System.out.println("\n\nAt the top : "+restaurants.size());
+				//System.out.println(rowData[0]+" "+rowData[1]+" "+rowData[2]);
+				if(restaurants.isEmpty())
+				{
+					//System.out.println("Empty adding new");
+					menuItems.put(rowData[2].trim(), new Double(rowData[1]));
+					restaurants.put(new Integer(rowData[0]), menuItems);
+					//System.out.println(restaurants.size()+" "+menuItems.size());
+				}
+				else
+				{
+					//System.out.println("Res present");
+					if(restaurants.containsKey(new Integer(rowData[0])))
+					{
+						//System.out.println(rowData[0]+" present");
+						menuItems = restaurants.get(new Integer(rowData[0]));
+					}
+					else
+					{
+						//System.out.println(rowData[0]+"not present");
+					}
+					menuItems.put(rowData[2].trim(), new Double(rowData[1]));
+					restaurants.put(new Integer(rowData[0]), menuItems);
+					//System.out.println(restaurants.size()+" "+menuItems.size());
+				}
+				//new MainClass().display(restaurants);
+				//System.out.println("\n AFter display");
+				/*for(String data:rowData)
+				{
+					System.out.print(data+"\t");
+				}*/
+				//System.out.println("\n");
+			}
+		}
+		catch(FileNotFoundException e)
+		{
+			System.out.println("File not present.");
+			//e.printStackTrace();
+		}
+		catch(IOException e)
+		{
+			System.out.println("Error reading file");
+		}	
+		
+		return restaurants;
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

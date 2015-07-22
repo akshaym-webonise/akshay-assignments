@@ -1,0 +1,60 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+public class IntelliBot {
+
+	/**
+	 * @param args
+	 */
+	
+	public int getCheapestRestaurant(Map<Integer, Map<String, Double>> restaurants, List<String> items)
+	{
+		boolean hasMenu;
+		Map<String, Double> menuItems = new HashMap<String, Double>();
+		for(Integer key:restaurants.keySet())
+		{
+			menuItems.clear();
+			menuItems = restaurants.get(key);
+			//System.out.println(menuItems);
+			hasMenu = isHavingTheMenu(menuItems, items);
+			System.out.println((hasMenu==true)?("Restaurant "+key+" has menu"):("Restaurant "+key+" doesn't have menu"));
+		}
+		return 1;
+	}
+	
+	public boolean isHavingTheMenu(Map<String, Double> menuItems, List<String> items)
+	{
+		boolean havingMenu=true, found;
+		for(String item : items)
+		{
+			found = containsItem(menuItems, item);
+			System.out.println(item+" "+found);
+			if(havingMenu && found)
+			havingMenu = true;
+		}
+		System.out.println(item+" are having "+havingMenu);
+		return havingMenu;
+	}
+	
+	
+	public boolean containsItem(Map<String, Double> menuItems, String item)
+	{
+		for(String menu : menuItems.keySet())
+		{
+			System.out.println(menu+" "+item);
+			if(menu.contains(item))			
+			{				
+				return true;				
+			}
+		}
+		return false;
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

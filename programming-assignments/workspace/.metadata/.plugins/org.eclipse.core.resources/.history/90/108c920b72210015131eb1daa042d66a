@@ -1,0 +1,59 @@
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class MainClass 
+{
+
+	/**
+	 * @param args
+	 */
+	
+	public void display(Map<Integer, Map<String, Double>> restaurants)
+	{
+		Map<String, Double> menuItems = new HashMap<String, Double>();
+		
+		for(Integer key:restaurants.keySet())
+		{
+			
+			menuItems = restaurants.get(key);
+			System.out.print(" Restaurant ID : "+key+"\n");
+			
+			for(String item:menuItems.keySet())
+			{
+				System.out.println(item+" "+menuItems.get(item));
+			}
+			menuItems.clear();
+			System.out.println();
+		}
+		
+	}
+	
+	public static void main(String[] args) 
+	{
+		int tokens = args.length;
+		String menuFile="";
+		String items[] = new String[10];
+		int totalItems=0;
+		Map<Integer, Map<String, Double>> restaurants;
+		
+		for(int arg = 0 ; arg<tokens ; arg++)
+		{
+			System.out.println("Arg "+arg+" : "+args[arg]);
+		}
+		
+		menuFile = args[0];
+		
+		for(int item = 1 ; item<tokens ; item++)
+		{
+			items[totalItems++] = args[item];
+			//System.out.println("1. "+args[item]);
+		}
+		restaurants = new FileLoader().loadMenuFile(menuFile);
+		
+		//new MainClass().display(restaurants);
+		
+		int restaurantId = new IntelliBot().getCheapestRestaurant(restaurants, items);
+		System.out.println("Terminated");
+	}
+}
