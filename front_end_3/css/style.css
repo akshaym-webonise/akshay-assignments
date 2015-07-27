@@ -1,0 +1,139 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+header 
+{
+	height: 55px;
+}
+
+.container 
+{
+	width: 940px;
+	margin: 0 auto;
+}
+
+.logo
+{
+	float: left;
+	font-size: 36px;
+	text-align: center;
+	background-color: #ff8000;
+	width: 135px;
+	height: 55px;
+}
+
+a{
+	outline: 0;
+	text-decoration: none;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.rcorn ul{
+	padding-left: 100px;
+}
+
+.hmenu li a{
+	display: inline;
+	float: left;
+	padding-top: 20px;
+	padding-left: 30px;	
+	text-decoration: none;
+	font-size: 16px;
+	color: #000;
+	outline: 0;
+	text-decoration: none;
+}
+
+.banner
+{
+	width: auto;
+	background-color: #000000;
+}
+
+
+h1
+{
+	position: absolute;
+	font-size: 44px;
+	color: #FFFFFF;
+	top: 490px;
+	left: 375px;
+	font-family: Arial;
+	
+}
+
+h4
+{
+	position: absolute;
+	font-size: 22px;
+	color: #FFFFFF;
+	top: 550px;
+	left: 375px;
+	font-weight: lighter;
+}
+
+.surf-container
+{
+	background-color: #ecab1f;
+	height: 200px;
+}
+
+.surf-container .rcorners 
+{
+    border-radius: 15px;
+    background: #FFFFFF;
+    width: 220px;
+    height: 60px;
+}
+
+
+
+header li a , .surf-container ul li {
+	display: inline;
+	float: left;
+	padding: 20px 20px 100px 0px;	
+	text-decoration: none;
+	font-size: 16px;
+	color: #000;
+	outline: 0;
+	text-decoration: none;
+}
+
+
+/*****************************************************************************************
+
+
+
+.cmenu li a{
+	width: 140px;
+	display: inline;
+	float: left;	
+	text-align: center;
+	text-decoration: none;
+	font-size: 18px;
+	color: #888888;
+	outline: 0;
+	text-decoration: none;
+	margin-right: 75px;
+}
+
+.nomargin
+{
+	margin-right: 0;
+}
+
+.cmenu li a:hover 
+{
+    color: #444444;
+}*/
+
+
+.clear
+{
+	clear: both;
+}
+
