@@ -21,6 +21,7 @@ header
 	background-color: #ff8000;
 	width: 135px;
 	height: 55px;
+	margin-right: 15px;
 }
 
 a{
@@ -32,38 +33,60 @@ ul{
 	list-style-type: none;
 }
 
-.rcorn ul{
-	padding-left: 100px;
-}
-
 .hmenu li a{
-	display: inline;
 	float: left;
-	padding-top: 20px;
-	padding-left: 30px;	
+	padding: 17px;
 	text-decoration: none;
 	font-size: 16px;
 	color: #000;
-	outline: 0;
-	text-decoration: none;
 }
+
+form{
+	float: right;
+	border: solid;
+	border-radius: 15px;
+	border-width: 1px;
+	border-color: #888888;
+	margin: 5px 0px;
+}
+
+.text {	
+	border-width: 0px;
+	width: 200px;
+	height: 40px;
+	float: left;
+	outline: none;
+	margin-left: 10px
+}
+
+.icon {
+
+	width: 40px;
+	height: 40px;
+	float: right;
+}
+
+/***************************************************************************/
 
 .banner
 {
 	width: auto;
 	background-color: #000000;
+	background-position: center top;
 }
 
+.banner-img
+{
+	width: 940px;
+}
 
 h1
 {
 	position: absolute;
 	font-size: 44px;
 	color: #FFFFFF;
-	top: 490px;
-	left: 375px;
-	font-family: Arial;
-	
+	top: 435px;
+	font-family: Arial;	
 }
 
 h4
@@ -71,66 +94,99 @@ h4
 	position: absolute;
 	font-size: 22px;
 	color: #FFFFFF;
-	top: 550px;
-	left: 375px;
+	top: 485px;
 	font-weight: lighter;
 }
+
+/***************************************************************************/
+
+h3
+{
+	font-size: 18px;
+}
+
+h5
+{
+	font-size: 11px;
+}
+
+
 
 .surf-container
 {
 	background-color: #ecab1f;
-	height: 200px;
+	padding: 20px 0px;
+	margin-bottom: 60px;
 }
-
-.surf-container .rcorners 
+.rcorners 
 {
     border-radius: 15px;
     background: #FFFFFF;
     width: 220px;
     height: 60px;
 }
-
-
-
-header li a , .surf-container ul li {
-	display: inline;
+.surf-container ul li {
+	display: block;
 	float: left;
-	padding: 20px 20px 100px 0px;	
+	margin-right: 20px;	
 	text-decoration: none;
 	font-size: 16px;
 	color: #000;
 	outline: 0;
 	text-decoration: none;
 }
+.surf-container .nomargin{
+	margin-right: 0px;
+}
 
+.surf-container ul li a{
+	color: #222222;
+}
 
-/*****************************************************************************************
+.rcorners-img{
+	float: right;
+	padding-top: 17px;
+	padding-right: 20px;
+}
 
+/***************************************************************************/
 
-
-.cmenu li a{
-	width: 140px;
-	display: inline;
-	float: left;	
-	text-align: center;
-	text-decoration: none;
-	font-size: 18px;
+h2
+{
 	color: #888888;
-	outline: 0;
-	text-decoration: none;
-	margin-right: 75px;
+	font-size: 40px;
 }
 
-.nomargin
-{
-	margin-right: 0;
+.happening h2{
+	color: #888888;
+	font-size: 40px;
 }
 
-.cmenu li a:hover 
-{
-    color: #444444;
-}*/
+p{
+	float: left;
+	font-size: 22px;
+	padding-top: 17px;
+	padding-left: 20px;
+}
+.images-list li {
+	float: left;
+	margin-right: 20px;	
+}
+.images-list .nomargin{
+	margin-right: 0px;
+}
 
+.back-image{
+	background-color: #4466ff;
+	color: white;
+	padding-top: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+.images-list img{
+	display: block;
+}
 
 .clear
 {
