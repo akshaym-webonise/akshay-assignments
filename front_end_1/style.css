@@ -1,6 +1,20 @@
+body
+{
+  margin: 0;
+  padding: 0;
+}
+
 .container {
-  margin-right: 80px;
-  margin-left: 80px;
+  width: 940px;
+  padding: auto;
+  margin: auto;
+  /*margin-right: 80px;
+  margin-left: 80px;*/
+  
+}
+
+h1, h2, h4{
+  margin: 0 0;
 }
 
 
@@ -16,7 +30,7 @@
 }
 
 .banner {
-  background-color: #BFBFBF;
+    background-color: #BFBFBF;
   text-align: center;
   font-size: 32px;
   font-weight: bold;
